@@ -1,4 +1,4 @@
-classes=1
+classes=1 
 train=./datatrain.txt
 valid=./dataval.txt
 names=data/coco.names

@@ -96,6 +96,11 @@ def detect(
         if webcam:  # Show live webcam
             cv2.imshow(weights, im0)
 
+            key = cv2.waitKey(1)
+            if key & 0xFF == ord('q'):
+                break
+            continue
+
         if save_images:  # Save image with detections
             if dataloader.mode == 'images':
                 cv2.imwrite(save_path, im0)
@@ -128,6 +133,7 @@ if __name__ == '__main__':
     parser.add_argument('--nms-thres', type=float, default=0.5, help='iou threshold for non-maximum suppression')
     parser.add_argument('--fourcc', type=str, default='mp4v', help='specifies the fourcc code for output video encoding (make sure ffmpeg supports specified fourcc codec)')
     parser.add_argument('--output', type=str, default='output',help='specifies the output path for images and videos')
+    parser.add_argument('--webcam', type=bool, default=False, help='use webcam or not' )
     opt = parser.parse_args()
     print(opt)
 
@@ -141,5 +147,6 @@ if __name__ == '__main__':
             conf_thres=opt.conf_thres,
             nms_thres=opt.nms_thres,
             fourcc=opt.fourcc,
-            output=opt.output
+            output=opt.output,
+            webcam=opt.webcam
         )
